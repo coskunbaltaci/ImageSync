@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">cb_imagesync_importlist_listing.cb_imagesync_importlist_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>cb_imagesync_importlist_columns</spinner>
+        <deps>
+            <dep>cb_imagesync_importlist_listing.cb_imagesync_importlist_listing_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="imgsync-get-import-list">
+                <url path="*/*/getimportlist"/>
+                <class>primary</class>
+                <label translate="true">Get Import List</label>
+            </button>
+            <button name="imgsync-start-image-import">
+                <url path="*/*/startimportbutton"/>
+                <label translate="true">Start Image Import</label>
+            </button>
+        </buttons>
+    </settings>
+    <dataSource name="cb_imagesync_importlist_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">cb_imagesync_importlist_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">import_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">import_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="indexField" xsi:type="string">import_id</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="cb_imagesync/importlist/massDelete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete Post</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+    <columns name="cb_imagesync_importlist_columns">
+        <settings>
+            <editorConfig>
+                <param name="selectProvider" xsi:type="string">
+                    cb_imagesync_importlist_listing.cb_imagesync_importlist_listing.cb_imagesync_importlist_columns.ids
+                </param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="indexField" xsi:type="string">import_id</param>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+            </editorConfig>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>import_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="import_id" sortOrder="1">
+            <settings>
+                <filter>text</filter>
+                <sorting>desc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="sku" sortOrder="2">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">SKU</label>
+            </settings>
+        </column>
+        <column name="image_file_name" sortOrder="3">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Image File Name</label>
+            </settings>
+        </column>
+        <column name="image_order" sortOrder="4">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Image Order</label>
+            </settings>
+        </column>
+        <column name="alt_text" sortOrder="5">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Alt Text</label>
+            </settings>
+        </column>
+        <column name="status" sortOrder="6">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Cb\ImageSync\Ui\Component\Listing\Column\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">select</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">false</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </column>
+        <column name="message" sortOrder="7">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Message</label>
+            </settings>
+        </column>
+        <column name="created_at" sortOrder="8">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+        <column name="updated_at" sortOrder="9">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Worked Time</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

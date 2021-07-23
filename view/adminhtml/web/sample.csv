@@ -1,0 +1,3 @@
+sku,image_file_name,image_order,alt_text
+test,custom-format-test.jpg,1,"Red T-shirt"
+test2,custom-format-test2.jpg,1,"Yellow T-shirt"

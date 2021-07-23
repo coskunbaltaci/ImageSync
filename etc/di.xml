@@ -1,0 +1,54 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <virtualType name="cbImageSyncLoggerFileHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+            <argument name="fileName" xsi:type="string">/var/log/cb_image_sync.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="cbImageSyncLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">cb_image_sync</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="file" xsi:type="object">cbImageSyncLoggerFileHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Cb\ImageSync\Cron\Sync">
+        <arguments>
+            <argument name="logger" xsi:type="object">cbImageSyncLogger</argument>
+        </arguments>
+    </type>
+    <type name="Cb\ImageSync\Helper\Data">
+        <arguments>
+            <argument name="logger" xsi:type="object">cbImageSyncLogger</argument>
+        </arguments>
+    </type>
+    <type name="Cb\ImageSync\Provider\Ftp">
+        <arguments>
+            <argument name="logger" xsi:type="object">cbImageSyncLogger</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="cb_image_sync_execute" xsi:type="object">\Cb\ImageSync\Console\Command\CbSync</item>
+                <item name="cb_create_folder_execute" xsi:type="object">Cb\ImageSync\Console\Command\CbCreateFolder</item>
+                <item name="cb_save_import_list" xsi:type="object">Cb\ImageSync\Console\Command\CbSaveImportList</item>
+                <item name="cb_delete_done_rows" xsi:type="object">Cb\ImageSync\Console\Command\CbDeleteDoneRows</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="cb_imagesync_importlist_listing_data_source" xsi:type="string">Cb\ImageSync\Model\ResourceModel\ImageList\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Cb\ImageSync\Model\ResourceModel\ImageList\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">cb_imagesync_import_list</argument>
+            <argument name="resourceModel" xsi:type="string">Cb\ImageSync\Model\ResourceModel\ImportList</argument>
+        </arguments>
+    </virtualType>
+</config>

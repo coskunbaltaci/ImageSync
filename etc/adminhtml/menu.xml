@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="cb_imagesync::menu" 
+            title="CB Modules" 
+            module="Cb_ImageSync" 
+            sortOrder="10" 
+            resource="Cb_ImageSync::menu"
+            dependsOnConfig="cb_imagesync/general/active"
+        />
+        <add id="cb_imagesync::imagesync"
+            title="ImageSync"
+            module="Cb_ImageSync"
+            sortOrder="25"
+            resource="Magento_Backend::content"
+            parent="cb_imagesync::menu"
+            dependsOnConfig="cb_imagesync/general/active"
+
+        />
+        <add id="cb_imagesnyc::cb_imagesync_importlist"
+            title="ImageSync Index"
+            action="cb_imagesync/importlist/index" 
+            module="Cb_ImageSync"
+            parent="cb_imagesync::imagesync" 
+            resource="Magento_Backend::content" 
+            dependsOnConfig="cb_imagesync/general/active"
+            sortOrder="10" 
+        />
+    </menu>
+</config>

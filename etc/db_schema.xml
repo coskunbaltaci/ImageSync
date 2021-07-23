@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table comment="cb_imagesync_import_list Table" engine="innodb" name="cb_imagesync_import_list" resource="default">
+		<column comment="Entity Id" identity="true" name="import_id" nullable="false" padding="6" unsigned="true" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="import_id"/>
+		</constraint>
+		<column length="255" name="sku" nullable="false" xsi:type="varchar"/>
+		<column length="255" name="image_file_name" nullable="true" xsi:type="varchar"/>
+		<column padding="6" name="image_order" nullable="true" xsi:type="smallint"/>
+		<column name="alt_text" nullable="true" xsi:type="text"/>
+		<column default="0" name="status" nullable="false" xsi:type="boolean"/>
+        <column name="message" nullable="true" xsi:type="text"/>
+		<column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Created Datetime"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="true" on_update="false" comment="Updated Datetime"/>
+	</table>
+</schema>

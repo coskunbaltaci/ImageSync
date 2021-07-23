@@ -1,0 +1,41 @@
+<?php /* @var $block \Cb\ImageSync\Block\System\Config\StopButton */ ?>
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+
+        var stopButtonSpan = jQuery('#stop_button_span');
+        jQuery('#stop_sync_button').click(function () {
+            var params = {};
+           new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+                parameters:     params,
+                loaderArea:     false,
+                asynchronous:   true,
+                onCreate: function() {
+                    stopButtonSpan.find('.collected').hide();
+                    stopButtonSpan.find('.processing').show();
+                    jQuery('#stop_button_message_span').text('');
+                },
+                onSuccess: function(response) {
+                    stopButtonSpan.find('.processing').hide();
+                    var resultText = '';
+                    if (response.status > 200) {
+                        resultText = response.statusText;
+                    } else {
+                        resultText = 'Success';
+                        stopButtonSpan.find('.collected').show();
+                    }
+                    jQuery('#stop_button_message_span').text(resultText);
+                }
+            });
+        });
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>
+<span class="collect-indicator" id="stop_button_span">
+    <img class="processing" hidden="hidden" alt="Collecting" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+    <img class="collected" hidden="hidden" alt="Collected" style="margin:-3px 5px" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+    <span id="stop_button_message_span"></span>
+</span>

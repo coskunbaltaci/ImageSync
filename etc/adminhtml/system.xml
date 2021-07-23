@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cb_settings">
+            <label>Cb Settings</label>
+        </tab>
+        <section id="cb_imagesync" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>ImageSync</label>
+            <tab>cb_settings</tab>
+            <resource>Cb_ImageSync::configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="active" translate="" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Select <strong>Yes</strong> to enable this module.]]></comment>
+                </field>
+                <field id="use_custom_format" translate="" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Custom Format</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment model="Cb\ImageSync\Model\Config\CommentSampleFile"/>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="set_alt_tag" translate="" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Product Name as Alt tag</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                        <field id="*/*/use_custom_format">0</field>
+                    </depends>
+                </field>
+                <field id="frequency" translate="" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Import Frequency</label>
+                    <comment><![CDATA[cron definition in */5 * * * * format]]></comment>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="import_row_count" translate="" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Import row count</label>
+                    <comment>One transaction import row count</comment>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="delete_done_rows" translate="" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delete Done Rows Frequency</label>
+                    <comment><![CDATA[cron definition in */5 * * * * format]]></comment>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="log_emails" translate="" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log Emails</label>
+                    <comment><![CDATA[comma separated e-mails]]></comment>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="ftp" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>FTP</label>
+                <depends>
+                    <field id="*/general/active">1</field>
+                </depends>
+                <field id="host" translate="" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Host</label>
+                    <comment><![CDATA[default port is 21 (ftp), for others use host:port format]]></comment>
+                </field>
+                <field id="username" translate="" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Username</label>
+                </field>
+                <field id="password" translate="" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Password</label>
+                </field>
+                <field id="path" translate="" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Path</label>
+                    <comment><![CDATA[Remote path to download images]]></comment>
+                </field>
+                <field id="success_path" translate="" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Success Path</label>
+                    <comment><![CDATA[Remote Path to move successfull files]]></comment>
+                </field>
+                <field id="logs_path" translate="" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Logs Path</label>
+                    <comment><![CDATA[Remote Path for logs files]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

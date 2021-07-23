@@ -1,0 +1,10 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="cb">
+        <job name="cb_sync_images" instance="Cb\ImageSync\Cron\Sync" method="execute">
+            <config_path>cb_imagesync/general/frequency</config_path>
+        </job>
+        <job name="cb_sync_images_delete_done_rows" instance="Cb\ImageSync\Cron\DeleteDoneRows" method="execute">
+            <config_path>cb_imagesync/general/delete_done_rows</config_path>
+        </job>
+    </group>
+</config>
